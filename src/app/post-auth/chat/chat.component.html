@@ -1,0 +1,44 @@
+<form [formGroup]="messageData">
+<div class="form-group">
+    <mat-form-field class="example-full-width">
+        <input formControlName="message" matInput placeholder="Type a message">
+    </mat-form-field>
+   
+</div>
+<button (click)= "postMessage()">send</button>
+</form>
+
+<div class="container">
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-8">
+                    <h2>Messages</h2>
+                </div>
+                <div class="col-sm-4">
+
+                </div>
+            </div>
+        </div>
+        <table class="table table-bordered">
+            
+            <tbody>
+               
+                    <tr *ngFor="let chat of getMessageData">
+                        <td>{{chat.senderName}}</td>
+                        <td>{{chat.messageBody.message}}</td>
+                        <td>{{chat.timeStamp|date}}</td>
+                        <!-- <td>
+                            <button mat-raised-button color="primary" (click)="updateUser(emp)">Update</button>
+                        </td>
+                        <td>
+                            <button mat-raised-button color="warn" (click)="deleteUser(emp.id)">Delete</button>
+                        </td>
+
+                    </tr> -->
+               
+
+            </tbody>
+        </table>
+    </div>
+</div>
