@@ -1,3 +1,4 @@
+<app-header></app-header>
 <form [formGroup]="messageData">
 <div class="form-group">
     <mat-form-field class="example-full-width">
@@ -27,7 +28,7 @@
                     <tr *ngFor="let chat of getMessageData">
                         <td>{{chat.senderName}}</td>
                         <td>{{chat.messageBody.message}}</td>
-                        <td>{{chat.timeStamp|date}}</td>
+                        <td>{{chat.timeStamp| date:'medium'}}</td>
                         <!-- <td>
                             <button mat-raised-button color="primary" (click)="updateUser(emp)">Update</button>
                         </td>

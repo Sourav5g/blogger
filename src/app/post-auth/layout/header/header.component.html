@@ -1,1 +1,8 @@
-<p>header works!</p>
+<button mat-button [matMenuTriggerFor]="menu">Menu</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="routeTo('')" routerLinkActive="active">dashboard</button>
+  <button mat-menu-item (click)="routeTo('chat')">chat box</button>
+  <button mat-menu-item (click)="routeTo('chat-room')">chat room</button>
+  <button mat-menu-item (click)="routeTo('calender')">calender</button>
+  <button mat-menu-item (click)="routeTo('floara')">floara</button>
+</mat-menu>

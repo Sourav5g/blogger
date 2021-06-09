@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChatService } from 'src/app/core/services/chat/chat.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/firestore';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-chat',
@@ -11,8 +12,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class ChatComponent implements OnInit {
   messageData!: FormGroup;
   user: any
-  getMessageData :any
- // arr!: any[];
+  getMessageData: any
+  // arr!: any[];
   // data = {
   //    chat_id: "RKdMKJsF6g7k1foS7O",
   //     message: "hi",
@@ -32,17 +33,16 @@ export class ChatComponent implements OnInit {
     console.log(this.user)
     this.chatData();
 
-    //this.getMessageData = this.firestore.collection('chat', ref => ref.orderBy('timeStamp'));
     this.chatService.getMessages().subscribe((data: any[]) => {
       this.getMessageData = data.map((item: { payload: { doc: { data: () => any; id: any; }; }; }) => {
-         const object: any = item.payload.doc.data();
-         return object;
- 
-       })
-       console.log(this.getMessageData);
-     });
-   // console.log(this.getMessageData);
-    
+        const object: any = item.payload.doc.data();
+        return object;
+      })
+      this.getMessageData = this.getMessageData.sort((left: any, right: any) => {
+        return moment.utc(right.timeStamp).diff(moment.utc(left.timeStamp))
+      })
+    });
+
   }
 
   // sortData() {

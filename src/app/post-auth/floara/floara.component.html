@@ -1,0 +1,5 @@
+<app-header></app-header>
+<!-- <div [froalaEditor]>Hello, Froala!</div> -->
+<div [froalaEditor] [(froalaModel)]="editorContent"></div>
+<div [froalaView]="editorContent"></div>
+<!-- <div (froalaInit)="initialize($event)"[froalaEditor]='options'></div> -->
