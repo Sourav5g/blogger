@@ -1,0 +1,15 @@
+<app-header></app-header>
+<div class="box-header with-border">
+    <div class="form-group voffset row">
+        <label for="" class="vertical-label col-sm-4 col-md-8 text-right">Update form</label>
+        <div class="col-sm-8 col-md-4">
+            <button (click)="createComponent(1)">sample1 Component</button>
+            <br>
+            <button (click)="createComponent(2)">sample2 Component</button>
+
+        </div>
+    </div>
+    <div class="form-group voffset row">
+        <template #loadComponent></template>
+    </div>
+</div>

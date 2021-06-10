@@ -23,6 +23,14 @@ const routes: Routes = [
     path: 'floara',
     loadChildren: () => import('./floara/floara.module').then(m => m.FloaraModule),
   },
+  {
+    path: 'gridster',
+    loadChildren: () => import('./gridsters/gridsters.module').then(m => m.GridstersModule),
+  },
+  {
+    path: 'dynamicComponent',
+    loadChildren: () => import('./dynamic-cmpt/dynamic-cmpt.module').then(m => m.DynamicCmptModule),
+  },
 ];
 
 @NgModule({

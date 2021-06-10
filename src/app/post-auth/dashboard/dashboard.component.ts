@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
- import { FormGroup, FormBuilder,Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from '../../core/services/data/data.service'
 import { NgxSpinnerService } from "ngx-spinner";
@@ -13,7 +13,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 export class DashboardComponent implements OnInit {
   loginDetails!: Object;
   updateData!: FormGroup;
-  updateWithId :any
+  updateWithId: any
 
   employee!: any;
   // object: any;
@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.spinner.show();
     this.dataService.getData().subscribe(data => {
-     // console.log(data)
+      // console.log(data)
       this.employee = data.map(item => {
         const object: any = item.payload.doc.data();
         object["id"] = item.payload.doc.id;
@@ -63,7 +63,7 @@ export class DashboardComponent implements OnInit {
   //     this.spinner.hide();
   //   }, 5000);
   // }
-  
+
 
   userLogout() {
     localStorage.removeItem('num');
@@ -77,7 +77,7 @@ export class DashboardComponent implements OnInit {
   //     password: ['',Validators.required],
   //     email: ['',Validators.required]
   //   });
-    
+
   // }
 
   deleteUser(id: any) {
@@ -85,25 +85,25 @@ export class DashboardComponent implements OnInit {
     this.dataService.deleteData(id);
   }
 
- //get f() { return this.updateData.controls; }
+  //get f() { return this.updateData.controls; }
 
 
-  updateUser(emp: any){
+  updateUser(emp: any) {
     //console.log(emp.first_name)
-      this.updateWithId = emp.id;
-     console.log(emp.id)
+    this.updateWithId = emp.id;
+    //console.log(emp.id)
     this.updateData.patchValue({
-      id:emp.id,
+      id: emp.id,
       first_name: emp.first_name,
       password: emp.password,
-      email:emp.email,
+      email: emp.email,
     })
-    console.log(this.updateWithId)
-     
-    
-     //this.dataService.updateData( this.data);
+    //console.log(this.updateWithId)
+
+
+    //this.dataService.updateData( this.data);
   }
-  update(){
+  update() {
     this.updateData.value["id"] = this.updateWithId;
     //console.log( this.updateData.value);
     this.dataService.updateData(this.updateData.value)
