@@ -11,6 +11,7 @@ import { LayoutModule } from '../layout/layout.module';
 import { MatCardModule } from '@angular/material/card';
 import { UpdateFormModule } from 'src/app/shared/modules/update-form/update-form.module';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     MatButtonModule,
     DashboardRoutingModule,
     UpdateFormModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    NgxDatatableModule
   ]
 })
 export class DashboardModule { }

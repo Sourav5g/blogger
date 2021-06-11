@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from '../../core/services/data/data.service'
 import { NgxSpinnerService } from "ngx-spinner";
@@ -12,21 +12,17 @@ import { NgxSpinnerService } from "ngx-spinner";
 })
 export class DashboardComponent implements OnInit {
   loginDetails!: Object;
+  addRowFromGroup!: FormGroup;
   updateData!: FormGroup;
   updateWithId: any
-
   employee!: any;
-  // object: any;
-  //  data = {
-  //   id: "RKrWdMKJsF6g7k1foS7O",
-  //   first_name: "sourav",
-  //   password: "chowdhury",
-  //   email: "ann@codingthesmartway.com"
-  // };
+  index =0;
+
   constructor(
     private router: Router,
     private dataService: DataService,
     private fb: FormBuilder,
+    private addRrowfb: FormBuilder,
     private spinner: NgxSpinnerService
 
   ) { }
@@ -45,40 +41,68 @@ export class DashboardComponent implements OnInit {
 
       //console.log(this.employee);
     });
-    //this.formUpdate();
+    //Update form group
     this.updateData = this.fb.group({
       first_name: [''],
       password: [''],
       email: ['']
     });
 
+    //addRow form group
+    this.addRowFromGroup = this.addRrowfb.group({
+      itemRows: this.addRrowfb.array([this.initItemRows()]),
+    });
+
   }
 
-  // spinnerloader(){
-  //   // console.log("2222")
-  //   this.spinner.show();
+  initItemRows() {
+    return this.addRrowfb.group({
+      first_name: [''],
+      password: [''],
+      email: ['']
+    })
+  }
 
-  //   setTimeout(() => {
-  //     /** spinner ends after 5 seconds */
-  //     this.spinner.hide();
-  //   }, 5000);
-  // }
+  addNewRow() {
+    const control = <FormArray>this.addRowFromGroup.get('itemRows');
+    this.index=control.value.length
+    control.push(this.initItemRows());
+  }
 
+  deleteRows(i: number) {
+    if(this.index > 0){
+      this.index = i-1
+    }
+    //this.index = i
+    // console.log(i)
+    const control = <FormArray>this.addRowFromGroup.get('itemRows');
+    if (control.value.length > 1) {
+      control.removeAt(i);
+    } else {
+      alert("one record is mandetary")
+    }
+
+  }
+
+  getControls() {
+    return (this.addRowFromGroup.get('itemRows') as FormArray).controls
+  }
+
+  //insert all data from multiple rows
+  insertAllData() {
+    console.log(this.index)
+    for (let i = 0; i <= this.index; i++) {
+      console.log (this.addRowFromGroup.value.itemRows[i]);
+      this.dataService.addData(this.addRowFromGroup.value.itemRows[i])
+    }
+    this.addRowFromGroup.reset();
+  }
 
   userLogout() {
     localStorage.removeItem('num');
     localStorage.removeItem('googleToken');
     this.router.navigate(['']);
   }
-
-  // formUpdate(){
-  //   this.updateData = this.fb.group({
-  //     first_name: ['',Validators.required],
-  //     password: ['',Validators.required],
-  //     email: ['',Validators.required]
-  //   });
-
-  // }
 
   deleteUser(id: any) {
     //console.log(id)

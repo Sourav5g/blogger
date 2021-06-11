@@ -5,9 +5,54 @@
 <div>
     <button mat-raised-button color="primary" (click)="userLogout()">Logout</button>
 </div>
-<!-- <div>
-    <button mat-raised-button color="primary" (click)="spinnerloader()">spinner</button>
-</div> -->
+
+<form [formGroup]="addRowFromGroup">
+    <div>
+        <mat-card>
+            <div formArrayName="itemRows">
+                <mat-card-title>Add rows</mat-card-title>
+                <ng-container *ngIf='addRowFromGroup.controls.itemRows!=null'>
+                    <div *ngFor="let itemrow of getControls(); let i = index" [formGroupName]="i">
+                        <div class="form-group">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Username</mat-label>
+                                <input formControlName="first_name" matInput placeholder="Enter Name">
+                            </mat-form-field>
+
+                        </div>
+                        <div class="form-group">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>password</mat-label>
+                                <input formControlName="password" matInput placeholder="Enter password">
+                            </mat-form-field>
+
+                        </div>
+                        <div class="form-group">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>email</mat-label>
+                                <input formControlName="email" matInput placeholder="Enter email">
+                            </mat-form-field>
+
+                        </div>
+
+                        <div>
+                            <button mat-raised-button color="primary" (click)="deleteRows(i)">Remove</button>
+                        </div>
+                    </div>
+                </ng-container>
+                <br>
+                <div>
+                    <button mat-raised-button color="primary" (click)="addNewRow()">Add Row</button>
+                </div>
+                <br>
+                <div>
+                    <button mat-raised-button color="primary" (click)="insertAllData()">Insert All Data</button>
+                </div>
+            </div>
+        </mat-card>
+
+    </div>
+</form>
 
 <div class="container">
     <div class="table-wrapper">
@@ -31,21 +76,21 @@
                 </tr>
             </thead>
             <tbody>
-               
-                    <tr *ngFor="let emp of employee, let i = index">
-                        <td>{{i + 1}}</td>
-                        <td>{{emp.first_name}}</td>
-                        <td>{{emp.password}}</td>
-                        <td>{{emp.email}}</td>
-                        <td>
-                            <button mat-raised-button color="primary" (click)="updateUser(emp)">Update</button>
-                        </td>
-                        <td>
-                            <button mat-raised-button color="warn" (click)="deleteUser(emp.id)">Delete</button>
-                        </td>
 
-                    </tr>
-               
+                <tr *ngFor="let emp of employee, let i = index">
+                    <td>{{i + 1}}</td>
+                    <td>{{emp.first_name}}</td>
+                    <td>{{emp.password}}</td>
+                    <td>{{emp.email}}</td>
+                    <td>
+                        <button mat-raised-button color="primary" (click)="updateUser(emp)">Update</button>
+                    </td>
+                    <td>
+                        <button mat-raised-button color="warn" (click)="deleteUser(emp.id)">Delete</button>
+                    </td>
+
+                </tr>
+
 
             </tbody>
         </table>
@@ -54,34 +99,35 @@
 <app-update-form></app-update-form>
 
 <form [formGroup]="updateData">
-    <div >
-    <mat-card>
-        <mat-card-title>Update Data</mat-card-title>
-        <div class="form-group">
-            <mat-form-field class="example-full-width">
-                <mat-label>Username</mat-label>
-                <input formControlName="first_name" matInput placeholder="Enter Name" >
-            </mat-form-field>
-            
-        </div>
-        <div class="form-group">
-            <mat-form-field class="example-full-width">
-                <mat-label>password</mat-label>
-                <input formControlName="password" matInput placeholder="Enter password">
-            </mat-form-field>
-            
-        </div>
-        <div class="form-group">
-            <mat-form-field class="example-full-width">
-                <mat-label>email</mat-label>
-                <input formControlName="email" matInput placeholder="Enter email">
-            </mat-form-field>
-            
-        </div>
-        
-        <div>
-            <button mat-raised-button color="primary" (click)="update()">Update</button>
-        </div>
-    </mat-card>
-</div>
+    <div>
+        <mat-card>
+            <mat-card-title>Update Data</mat-card-title>
+            <div class="form-group">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Username</mat-label>
+                    <input formControlName="first_name" matInput placeholder="Enter Name">
+                </mat-form-field>
+
+            </div>
+            <div class="form-group">
+                <mat-form-field class="example-full-width">
+                    <mat-label>password</mat-label>
+                    <input formControlName="password" matInput placeholder="Enter password">
+                </mat-form-field>
+
+            </div>
+            <div class="form-group">
+                <mat-form-field class="example-full-width">
+                    <mat-label>email</mat-label>
+                    <input formControlName="email" matInput placeholder="Enter email">
+                </mat-form-field>
+
+            </div>
+
+            <div>
+                <button mat-raised-button color="primary" (click)="update()">Update</button>
+            </div>
+        </mat-card>
+
+    </div>
 </form>

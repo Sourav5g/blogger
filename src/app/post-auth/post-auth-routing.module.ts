@@ -31,6 +31,10 @@ const routes: Routes = [
     path: 'dynamicComponent',
     loadChildren: () => import('./dynamic-cmpt/dynamic-cmpt.module').then(m => m.DynamicCmptModule),
   },
+  {
+    path: 'datatable',
+    loadChildren: () => import('./data-table/data-table.module').then(m => m.DataTableModule),
+  },
 ];
 
 @NgModule({

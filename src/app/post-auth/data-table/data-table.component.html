@@ -1,0 +1,31 @@
+<app-header></app-header>
+<p>data-table works!</p>
+
+
+<ngx-datatable class="bootstrap" [columnMode]="ColumnMode.flex" [headerHeight]="50" [footerHeight]="50" rowHeight="auto"
+    [rows]="employee" [limit]="2">
+    <ngx-datatable-column name="ID" [flexGrow]="1">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+            {{ value }}
+        </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Name" prop="first_name" [flexGrow]="1">
+        <ng-template  let-value="value" ngx-datatable-cell-template>
+            {{ value }}
+        </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Email" [flexGrow]="1">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+            {{ value }}
+        </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="password" [flexGrow]="1">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+            {{ value }}
+        </ng-template>
+    </ngx-datatable-column>
+</ngx-datatable>
+
+<!-- <div>
+     <ngx-datatable class="material" [rows]="employee" [columns]="columns"> </ngx-datatable>
+</div> -->
